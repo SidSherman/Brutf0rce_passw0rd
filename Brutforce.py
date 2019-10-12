@@ -21,7 +21,6 @@ def auth(url, login, password):
 try:
     generate_passwords(100000)
 except FileExistsError: pass
-passwords = open('passwords.txt', 'r')
 
 
 lgn = str(input("Введите логин: "))
