@@ -28,21 +28,20 @@ lgn = str(input("Введите логин: "))
 
 result = ""
 url = "http://localhost/test/scripts/"
-with open('passwords.txt', 'r') as passwords:
+with open('passwords.txt', 'r') as passwords, open("time.txt", "a") as f:
     temp = passwords.readlines()
     for i in range(len(temp)):
         if (str((auth(url, lgn, temp[i].strip())).text) != "Неверный логин или пароль"):
             result = temp[i].strip()
             result_url = (auth(url, lgn, temp[i].strip())).url
             webbrowser.open(result_url)
+            print("пароль: " + result)
+            time = start_time - time.clock()
+            f.write('длина пароля: {0}, время подбора {1} \n'.format(len(result), fabs(time)))
+
+            print('Время: ' + str(fabs(time)))
             break
 
-with open("time.txt", "a") as f:
-    time = start_time - time.clock()
-    f.write('длина пароля: {0}, время подбора {1} \n'.format(len(result), fabs(time)))
-
-print("пароль: " + result)
-print('Время: ' + str(fabs(time)))
 
 
 
